@@ -10,40 +10,59 @@ import {
   Text,
   View,
   ScrollView,
+  StatusBar,
 } from 'react-native';
 
 // import Post from './src/components/Post';
 
 import Reactotron from 'reactotron-react-native';
+import Post from './components/Post';
 
 Reactotron
   .configure() // controls connection & communication settings
   .useReactNative() // add all built-in react native plugins
   .connect(); // let's connect!
 
-class Post extends Component{
-  render() {
-    return (
-      <View style={styles.PostContainer}>
-        <Text style={styles.title}>Aprendendo React Native</Text>
-        <Text style={styles.author}>Delacyr Ferreira</Text>
-        <Text style={styles.description}>Lorem ipsum dolor sit amet, at quas congue nam, et etiam exerci nemore qui. Vim iusto invenire complectitur cu, sale elitr oportere vel ne. Ea mei fugit libris consectetuer, ex mei unum honestatis. Ut legimus salutatus usu.</Text>
-      </View>
-    );
-  }
-}
+export default class App extends Component {
+  state = {
+    posts: [
+      {
+        id: 0,
+        title: 'Lorem Ipsum',
+        author: 'Lorem Ipsum',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent congue sem et urna tincidunt posuere. Praesent bibendum hendrerit turpis. Ut ultrices porta ante vitae pulvinar.',
+      },
+      {
+        id: 1,
+        title: 'Lorem Ipsum',
+        author: 'Lorem Ipsum',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent congue sem et urna tincidunt posuere. Praesent bibendum hendrerit turpis. Ut ultrices porta ante vitae pulvinar.',
+      },
+      {
+        id: 2,
+        title: 'Lorem Ipsum',
+        author: 'Lorem Ipsum',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent congue sem et urna tincidunt posuere. Praesent bibendum hendrerit turpis. Ut ultrices porta ante vitae pulvinar.',
+      },
+      {
+        id: 3,
+        title: 'Lorem Ipsum',
+        author: 'Lorem Ipsum',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent congue sem et urna tincidunt posuere. Praesent bibendum hendrerit turpis. Ut ultrices porta ante vitae pulvinar.',
+      },
+    ],
+  };
 
-export default class App extends Component{
+  componentWillMount() {
+    StatusBar.setHidden(true);
+  }
+
   render() {
     return (
       <View style={styles.background}>
         <Text style={styles.header}>GoNative App</Text>
-        <ScrollView >
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
+        <ScrollView>
+          { this.state.posts.map(post => <Post key={post.id} post={post} />) }
         </ScrollView>
       </View>
     );
@@ -52,33 +71,21 @@ export default class App extends Component{
 
 const styles = StyleSheet.create({
   background: {
-    backgroundColor: '#EE7777'
+    backgroundColor: '#EE7777',
   },
   header: {
     backgroundColor: '#FFFFFF',
+    padding: 20,
+    shadowColor: '#DA6C6C',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 1.0,
+    shadowRadius: 5,
+    borderRadius: 5,
+    fontWeight: 'bold',
+    justifyContent: 'center',
+    alignItems: 'center',
     textAlign: 'center',
-    padding: 20
-  },
-  PostContainer: {
-      backgroundColor: '#FFFFFF',
-      marginTop: 20,
-      marginHorizontal: 20,
-      padding: 20
-  },
-  title: {
-      fontSize: 20,
-      textAlign: 'left',
-      color: '#333333',
-      fontWeight: 'bold'
-  },
-  author: {
-      color: '#999999',
-      textAlign: 'left'
-  },
-  description: {
-      textAlign: 'left',
-      color: '#666666',
-      paddingTop: 20
+    fontSize: 20,
   },
 
 });

@@ -3,27 +3,30 @@ import {
     StyleSheet,
     Text,
     View,
-    ScrollView,
   } from 'react-native';
 
-export default class Post extends Component{
-    render() {
-      return (
-        <View style={styles.PostContainer}>
-          <Text style={styles.title}>Aprendendo React Native</Text>
-          <Text style={styles.author}>Delacyr Ferreira</Text>
-          <Text style={styles.description}>Lorem ipsum dolor sit amet, at quas congue nam, et etiam exerci nemore qui. Vim iusto invenire complectitur cu, sale elitr oportere vel ne. Ea mei fugit libris consectetuer, ex mei unum honestatis. Ut legimus salutatus usu.</Text>
+const Post = ({post}) => (
+    <View style={styles.PostContainer}>
+        <Text style={styles.title}>{post.title}</Text>
+        <View style={styles.border}>
+        <Text style={styles.author}>{post.author}</Text>
         </View>
-      );
-    }
-  }
+        <Text style={styles.description}>{post.description}</Text>
+
+    </View>
+);
 
 const styles = StyleSheet.create({
     PostContainer: {
         backgroundColor: '#FFFFFF',
         marginTop: 20,
         marginHorizontal: 20,
-        padding: 20
+        padding: 20,
+        shadowColor: '#DA6C6C',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 1.0,
+        shadowRadius: 5,
+        borderRadius: 5,
     },
     title: {
         fontSize: 20,
@@ -33,11 +36,18 @@ const styles = StyleSheet.create({
     },
     author: {
         color: '#999999',
-        textAlign: 'left'
+        textAlign: 'left',
+        paddingBottom: 10,
     },
     description: {
         textAlign: 'left',
         color: '#666666',
-        paddingTop: 20
+        paddingTop: 20,
+    },
+    border: {
+        borderBottomWidth: 1,
+        borderColor: '#EEEEEE',
     },
 });
+
+export default Post;
